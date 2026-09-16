@@ -64,8 +64,8 @@ npm run build
   "mcpServers": {
     "confluence": {
       "command": "node",
-      "args": ["/Users/YOU/git/personal/confluence-read-mcp/dist/index.js"],
-      "envFile": "/Users/YOU/git/personal/confluence-read-mcp/.env"
+      "args": ["/Users/{path-to-mcp}/confluence-read-mcp/dist/index.js"],
+      "envFile": "/Users/{path-to-mcp}/confluence-read-mcp/.env"
     }
   }
 }
