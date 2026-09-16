@@ -1,0 +1,29 @@
+{
+  "name": "confluence-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for reading Confluence pages by id",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "confluence-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "dotenv": "^17.2.3",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}
