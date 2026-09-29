@@ -2,9 +2,15 @@ import { config as loadEnv } from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-loadEnv({ path: path.join(projectRoot, ".env") });
-loadEnv();
+const hasExternalConfig = Boolean(
+  process.env.CONFLUENCE_BASE_URL?.trim() &&
+    (process.env.CONFLUENCE_ACCESS_TOKEN ?? process.env.CONFLUENCE_API_TOKEN ?? process.env.TOKEN)?.trim()
+);
+
+if (!hasExternalConfig) {
+  const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  loadEnv({ path: path.join(projectRoot, ".env") });
+}
 
 export interface ConfluenceConfig {
   baseUrl: string;
