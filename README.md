@@ -1,46 +1,66 @@
 # confluence-mcp-server
 
-MCP-сервер с одним tool: `confluence_get_page`. Читает страницу Confluence по id.
+MCP-сервер для чтения страниц из Confluence.
 
-## Настройка
+Содержит один tool: `confluence_get_page` - читает страницу Confluence по id.
 
-1. Скопируйте `.env.example` в `.env` (файл уже может быть в проекте).
-2. Заполните переменные:
+Описание параметров:
 
-```env
-CONFLUENCE_BASE_URL=https://your-domain.atlassian.net/wiki
-CONFLUENCE_ACCESS_TOKEN=your-token
-```
+| Параметр | Тип | Описание |
+| --- | --- | --- |
+| `page_id` | string | ID страницы из URL `/pages/{id}/...` |
+| `response_format` | `markdown` \| `json` | По умолчанию `markdown` |
 
-Алиасы токена: `CONFLUENCE_ACCESS_TOKEN`, `CONFLUENCE_API_TOKEN`, `TOKEN`.
+Пример промта при использовании: «прочитай страницу Confluence 123456789».
 
-Для **Confluence Cloud** с API token дополнительно:
 
-```env
-CONFLUENCE_EMAIL=you@company.com
-```
+## Как подключить и использовать
 
-Тогда используется Basic auth (`email:token`). Без email — Bearer (PAT Data Center / Server).
+### 1. Установка зависимостей, сборка
 
-`CONFLUENCE_BASE_URL`:
-
-- Cloud: `https://your-domain.atlassian.net` или `https://your-domain.atlassian.net/wiki`
-- Server/DC: `https://confluence.company.com` (включая context path, если есть, например `/confluence`)
-
-## Установка
+Скачать, установить зависимости и выполнить сборку:
 
 ```bash
 npm install
 npm run build
 ```
 
-Нужен Node.js 18+.
+> Требуется Node.js 18+.
 
-## Подключение в Cursor
+После сборки нужно в вашей IDE/TUI прописать путь до собранного сервера (путь до index.js). И заполнить env-переменные, чтобы авторизовываться в Confluence.
 
-Проект уже содержит `.cursor/mcp.json`. После `npm run build` перезапустите Cursor или включите сервер в **Settings → MCP**.
+### 2. Авторизация в Confluence
 
-Ручная конфигурация:
+Для авторизации надо настроить env-переменные внутри вашего проекта:
+
+1. Добавьте файл `.env` в корне проекта (если его нет).
+2. Добавьте переменные с токеном и URL до вашей системы:
+
+```env
+CONFLUENCE_BASE_URL=https://your-domain.atlassian.net/wiki
+CONFLUENCE_ACCESS_TOKEN=your-token
+```
+
+> Токен можно задать через разные переменные -  `CONFLUENCE_ACCESS_TOKEN`, `CONFLUENCE_API_TOKEN`, `TOKEN`.
+
+Если вы используете **Confluence Cloud**, то дополнительно потребуется указать почту:
+
+```env
+CONFLUENCE_EMAIL=you@company.com
+```
+
+`CONFLUENCE_BASE_URL` может принимать следующие значения:
+
+- Cloud: `https://your-domain.atlassian.net` или `https://your-domain.atlassian.net/wiki`
+- Server/DC: `https://confluence.company.com` (включая context path, если есть, например `/confluence`)
+
+
+### 3. Подключение MCP-сервера в IDE/TUI
+
+MCP-сервер нужно указать в списке серверов из mcp.json, добавив путь до index.js (файл который запускает сервер) и до `.env-файла`. Ниже представлен один из вариантов конфигурации для Cursor.
+
+
+#### 3.1 Cursor
 
 **Проект:** `.cursor/mcp.json`  
 **Глобально:** `~/.cursor/mcp.json`
@@ -88,15 +108,4 @@ npm run build
 }
 ```
 
-После сохранения конфига сервер должен появиться в MCP с tool `confluence_get_page`.
-
-## Tool
-
-`confluence_get_page`
-
-| Параметр | Тип | Описание |
-| --- | --- | --- |
-| `page_id` | string | ID страницы из URL `/pages/{id}/...` |
-| `response_format` | `markdown` \| `json` | По умолчанию `markdown` |
-
-Пример: «прочитай страницу Confluence 123456789».
+В случае успешной настройки конфига сервер должен появиться в списке MCP-серверов с tool `confluence_get_page`.
