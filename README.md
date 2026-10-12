@@ -2,7 +2,8 @@
 
 MCP-сервер для чтения страниц из Confluence.
 
-Содержит один tool: `confluence_get_page` - читает страницу Confluence по id.
+Содержит один tool:
+`confluence_get_page` - читает страницу Confluence по id.
 
 Описание параметров:
 
@@ -11,7 +12,8 @@ MCP-сервер для чтения страниц из Confluence.
 | `page_id` | string | ID страницы из URL `/pages/{id}/...` |
 | `response_format` | `markdown` \| `json` | По умолчанию `markdown` |
 
-Пример промта при использовании: «прочитай страницу Confluence 123456789».
+Пример промта при использовании: 
+«прочитай страницу Confluence 123456789».
 
 
 ## Как подключить и использовать
