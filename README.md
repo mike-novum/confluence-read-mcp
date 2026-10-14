@@ -18,18 +18,11 @@ MCP-сервер для чтения страниц из Confluence.
 
 ## Как подключить и использовать
 
-### 1. Установка зависимостей, сборка
+### 1. Скачать сервер
 
-Скачать, установить зависимости и выполнить сборку:
-
-```bash
-npm install
-npm run build
-```
+Скачайте архив релиза и распакуйте его в любую директорию.
 
 > Требуется Node.js 18+.
-
-После сборки нужно в вашей IDE/TUI прописать путь до собранного сервера (путь до index.js). И заполнить env-переменные, чтобы авторизовываться в Confluence.
 
 ### 2. Авторизация в Confluence
 
@@ -59,35 +52,16 @@ CONFLUENCE_EMAIL=you@company.com
 
 ### 3. Подключение MCP-сервера в IDE/TUI
 
-MCP-сервер нужно указать в списке серверов из mcp.json, добавив путь до index.js (файл который запускает сервер) и до `.env-файла`. Ниже представлен один из вариантов конфигурации для Cursor.
+В `mcp.json` укажите путь до `index.js` из распакованного архива и до `.env`.
 
-
-#### 3.1 Cursor
-
-**Проект:** `.cursor/mcp.json`  
-**Глобально:** `~/.cursor/mcp.json`
 
 ```json
 {
   "mcpServers": {
     "confluence": {
       "command": "node",
-      "args": ["${workspaceFolder}/dist/index.js"],
-      "envFile": "${workspaceFolder}/.env"
-    }
-  }
-}
-```
-
-Для глобального конфига укажите абсолютный путь:
-
-```json
-{
-  "mcpServers": {
-    "confluence": {
-      "command": "node",
-      "args": ["/Users/{path-to-mcp}/confluence-read-mcp/dist/index.js"],
-      "envFile": "/Users/{path-to-mcp}/confluence-read-mcp/.env"
+      "args": ["/ABS/PATH/confluence-read-mcp/index.js"],
+      "envFile": "/ABS/PATH/.env"
     }
   }
 }
@@ -100,7 +74,7 @@ MCP-сервер нужно указать в списке серверов из
   "mcpServers": {
     "confluence": {
       "command": "node",
-      "args": ["${workspaceFolder}/dist/index.js"],
+      "args": ["/ABS/PATH/confluence-read-mcp/index.js"],
       "env": {
         "CONFLUENCE_BASE_URL": "https://your-domain.atlassian.net/wiki",
         "CONFLUENCE_ACCESS_TOKEN": "your-token"
