@@ -1,6 +1,8 @@
 node_modules
 dist
+confluence-read-mcp/
 .env
+release/
 *.log
 .DS_Store
 .cursor

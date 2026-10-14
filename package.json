@@ -2,7 +2,6 @@
   "name": "confluence-mcp-server",
   "version": "1.0.0",
   "description": "MCP server for reading Confluence pages by id",
-  "type": "module",
   "main": "dist/index.js",
   "bin": {
     "confluence-mcp-server": "dist/index.js"
@@ -10,7 +9,8 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
-    "build": "tsc",
+    "build": "tsc --noEmit && node scripts/build.mjs",
+    "tsc": "tsc --noEmit",
     "clean": "rm -rf dist"
   },
   "engines": {
@@ -31,6 +31,7 @@
     "@semantic-release/release-notes-generator": "^14.1.1",
     "@types/node": "^24.5.2",
     "conventional-changelog-conventionalcommits": "^10.4.1",
+    "esbuild": "^0.28.2",
     "semantic-release": "^25.0.9",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
